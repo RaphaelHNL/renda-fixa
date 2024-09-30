@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Editar ativo</h2>
+<mat-dialog-content>
+  <p>Você quer Editar o ativo <span>{{dataAtivo.descricao}}?</span></p>
+  <form [formGroup]="ativoFormGroup">
+
+    <mat-form-field>
+      <mat-label>Descrição renda fixa:</mat-label>
+      <input matInput #message maxlength="100" placeholder="Ex: Cdb" formControlName="descricao">
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <mat-label>Investimento minímo:</mat-label>
+      <input class="input-investimento" matInput currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"  #message placeholder="Ex: 1000" formControlName="investimentoMinimo">
+    </mat-form-field>
+
+
+
+    <mat-form-field>
+      <mat-label>Data de validade do ativo:</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dataValidade">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button cdkFocusInitial (click)="editarAtivo()" [disabled]="!ativoFormGroup.valid">Editar</button>
+</mat-dialog-actions>

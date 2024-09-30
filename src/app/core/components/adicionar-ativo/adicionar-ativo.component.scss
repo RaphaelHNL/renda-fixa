@@ -1,0 +1,19 @@
+.container-text{
+    display: flex;
+    flex-direction: column;
+}
+
+mat-form-field {
+    width: 100%;
+    .input-investimento{
+        text-align: start !important;
+    }
+}
+
+mat-dialog-actions{
+    align-items: center;
+    justify-content: center;
+    button{
+        width: 150px;
+    }
+}

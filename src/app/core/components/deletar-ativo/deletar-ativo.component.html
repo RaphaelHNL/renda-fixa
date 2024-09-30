@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Deletar ativo</h2>
+<mat-dialog-content>
+  <p>Você quer deletar o ativo <span>{{dataAtivo.descricao}}?</span></p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button cdkFocusInitial (click)="deletarAtivo()">Deletar</button>
+</mat-dialog-actions>

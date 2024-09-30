@@ -1,0 +1,69 @@
+<div class="container">
+  <h1>Beyond Renda Fixa</h1>
+
+
+  <mat-form-field>
+    <mat-label>Pesquisar ativo</mat-label>
+    <input matInput (keyup)="aplicarFiltro($event)" placeholder="Ex. cdb" #input>
+  </mat-form-field>
+
+  <button mat-button (click)="abrirAdicionarAtivo()">Adicionar novo ativo</button>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef> Descrição </th>
+        <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataValidade">
+        <th mat-header-cell *matHeaderCellDef> Data de validade </th>
+        <td mat-cell *matCellDef="let element"> {{element.dataValidade | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="investimentoMinimo">
+        <th mat-header-cell *matHeaderCellDef> Investimento minímo</th>
+        <td mat-cell *matCellDef="let element"> {{element.investimentoMinimo | currency}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tipoProduto">
+        <th mat-header-cell *matHeaderCellDef> Tipo de produto </th>
+        <td mat-cell *matCellDef="let element"> {{element.tipoProduto?.nome}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="indexador">
+        <th mat-header-cell *matHeaderCellDef> Indexador </th>
+        <td mat-cell *matCellDef="let element"> {{element.indexador?.nome}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acao">
+        <th mat-header-cell *matHeaderCellDef> Ações </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="container-acao">
+            <mat-icon aria-hidden="false" aria-label="Editar ativo" title="Editar ativo" fontIcon="edit"
+              (click)="abrirEdicaoAtivo(element)"></mat-icon>
+            <mat-icon aria-hidden="false" aria-label="Deletar ativo" title="Deletar ativo" fontIcon="delete"
+              (click)="abrirDialogDeletarAtivo(element)"></mat-icon>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+
+  <div class="container-loader" *ngIf="loader">
+    <p>Carregando ativos</p>
+    <mat-spinner></mat-spinner>
+  </div>
+
+</div>
+

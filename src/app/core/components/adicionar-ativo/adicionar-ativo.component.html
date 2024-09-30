@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Adicionar novo ativo de renda fixa</h2>
+<mat-dialog-content>
+  <div class="container-text">
+    <p>Desejar Adicionar um novo ativo?</p>
+    <p>Preencha as informações abaixo:</p>
+  </div>
+  <form [formGroup]="adicionarAtivoFormGroup">
+
+    <mat-form-field>
+      <mat-label>Descrição renda fixa:</mat-label>
+      <input matInput maxlength="100" placeholder="Ex: Cdb" formControlName="descricao">
+    </mat-form-field>
+
+
+    <mat-form-field>
+      <mat-label>Investimento minímo:</mat-label>
+      <input class="input-investimento" matInput currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"  placeholder="Ex: 1000" formControlName="investimentoMinimo">
+    </mat-form-field>
+
+
+
+    <mat-form-field>
+      <mat-label>Data de validade do ativo:</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dataValidade">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Tipo do Produto:</mat-label>
+        <mat-select formControlName="tipoProdutoId" (selectionChange)="getIndexador($event)">
+          <mat-option *ngFor="let produto of tiposProduto" [value]="produto.id">{{produto.nome}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Indexador do Produto:</mat-label>
+        <mat-select formControlName="indexadorId">
+          <mat-option *ngFor="let indexador of indexadores" [value]="indexador.id">{{indexador.nome}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button cdkFocusInitial (click)="adicionarNovoAtivo()" [disabled]="!adicionarAtivoFormGroup.valid">Adicionar</button>
+</mat-dialog-actions>

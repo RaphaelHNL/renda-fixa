@@ -1,0 +1,7 @@
+{
+    "/candidate": {
+    "target": "https://api.andbank.com.br",
+    "secure": false,
+    "changeOrigin": true
+    }
+}
